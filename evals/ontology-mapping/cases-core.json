@@ -1,0 +1,437 @@
+{
+ "about": "Fixed cases for the map-to-ontology skill. These test behaviour -- triggering, which moves are made, interpretation -- not the query layer, which has its own unit tests in packages/onto-query. Scored by check.py beside this file, against the move vocabulary in moves.py. Expected values for the original twelve were verified against the live services on 2026-10-02; the three cortex and frontal-bone cases on 2026-10-09.",
+ "cases": [
+  {
+   "id": "reproductive-tract",
+   "record": {
+    "raw_tissue": "full reproductive tract"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0000990"
+   ],
+   "tests": "No literal match. Latent knowledge has to supply 'reproductive tract' or 'genital tract' before any query succeeds. The sexed terms come back in the same result, so the judgement is whether 'full' means the unsexed whole.",
+   "must_mention": [
+    "reproductive system"
+   ],
+   "must_use": [
+    "alt-names"
+   ],
+   "answered_by_any_of": [
+    "alt-names"
+   ],
+   "must_not_use": [
+    "common-ancestors"
+   ]
+  },
+  {
+   "id": "skin",
+   "record": {
+    "raw_tissue": "skin"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0002097",
+    "UBERON:0000014"
+   ],
+   "tests": "Exact returns four terms with different synonym scopes, so no count-based exit is available. Needs either adjudication of those four or a second independent route. A correct answer names its rival from the other candidate.",
+   "must_name_rival_from": [
+    "UBERON:0002097",
+    "UBERON:0000014"
+   ],
+   "must_use": [
+    "exact"
+   ],
+   "answered_by_any_of": [
+    "exact",
+    "common-ancestors"
+   ]
+  },
+  {
+   "id": "spine-thoracic",
+   "record": {
+    "structure": "spine",
+    "region": "thoracic"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0006073"
+   ],
+   "tests": "Composing two fields into one name at Prepare beats any graph query: 'thoracic spine' is an exact synonym of UBERON:0006073. Reaching for the graph here means the composition was not made, which is the move most often skipped.",
+   "must_mention": [
+    "thoracic"
+   ],
+   "must_use": [
+    "exact"
+   ],
+   "answered_by_any_of": [
+    "exact"
+   ],
+   "max_moves": 2,
+   "must_not_use": [
+    "common-ancestors",
+    "relations"
+   ]
+  },
+  {
+   "id": "cornea-conjunctiva",
+   "record": {
+    "raw_tissue": "Cornea/Conjunctiva"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0010409"
+   ],
+   "tests": "Names two structures; the mapping for the whole sample is the most specific term grouping them. Requires common-ancestors over one seed per part. Fails entirely if part_of is dropped from the traversal.",
+   "must_use": [
+    "common-ancestors"
+   ],
+   "answered_by_any_of": [
+    "common-ancestors"
+   ]
+  },
+  {
+   "id": "stage-weeks",
+   "record": {
+    "age": "12 pcw",
+    "age_units": "weeks post conception"
+   },
+   "target": "hsapdv",
+   "accepted": [
+    "HsapDv:0000050"
+   ],
+   "tests": "Lexical search on the raw annotation cannot work: these terms carry no synonyms at all. The only route is the convert-construct-verify route -- a cohort survey to read the convention, then construct and verify. Searching at all is the error.",
+   "must_mention": [
+    "completed"
+   ],
+   "must_name_rival_from": [
+    "HsapDv:0000049"
+   ],
+   "must_use": [
+    "convert"
+   ],
+   "answered_by_any_of": [
+    "convert"
+   ],
+   "must_not_use": [
+    "exact",
+    "stemmed"
+   ]
+  },
+  {
+   "id": "cells-in-retina",
+   "record": {
+    "cell_type": "cone",
+    "tissue": "retina"
+   },
+   "target": "cl",
+   "accepted": [
+    "CL:0000573"
+   ],
+   "tests": "Tissue discriminates; it is not a search term. part_of retina returns 55 CL terms, among which the cone is unambiguous.",
+   "must_use": [
+    "relations"
+   ],
+   "answered_by_any_of": [
+    "relations"
+   ]
+  },
+  {
+   "id": "cells-to-structure",
+   "record": {
+    "cell_types": [
+     "retinal rod cell",
+     "retinal cone cell",
+     "Mueller cell"
+    ]
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0000966"
+   ],
+   "tests": "Co-annotation common ancestors across ontologies: CL seeds, Uberon target. The band includes chorioretinal region and photoreceptor array, so the answer should name one of those as the rival.",
+   "must_name_rival_from": [
+    "UBERON:0019207",
+    "UBERON:0005388",
+    "UBERON:0001802"
+   ],
+   "must_use": [
+    "common-ancestors"
+   ],
+   "answered_by_any_of": [
+    "common-ancestors"
+   ]
+  },
+  {
+   "id": "go-mixture",
+   "record": {
+    "processes": [
+     "glycolysis",
+     "TCA cycle"
+    ]
+   },
+   "target": "go",
+   "accepted": [
+    "GO:0009060",
+    "GO:0045333",
+    "GO:0015980",
+    "GO:0006091"
+   ],
+   "tests": "Four candidates within 4 IC, then a 39-point cliff. Any of the band is acceptable; what is not acceptable is presenting the top row as unambiguous. The report must acknowledge the band.",
+   "must_use": [
+    "common-ancestors"
+   ],
+   "answered_by_any_of": [
+    "common-ancestors"
+   ]
+  },
+  {
+   "id": "unrelated-pair",
+   "record": {
+    "raw_tissue": "cornea and femur"
+   },
+   "target": "uberon",
+   "accepted": [],
+   "expect_unresolved": true,
+   "tests": "IC tops out at 33.75 on a cross-cutting grouping class. The correct answer is that these do not share a meaningful ancestor and the sample should not be mapped to one term -- not 'lateral structure'.",
+   "must_not_answer": [
+    "UBERON:0015212",
+    "UBERON:0010314"
+   ],
+   "must_use": [
+    "common-ancestors"
+   ]
+  },
+  {
+   "id": "muscle",
+   "record": {
+    "raw_tissue": "muscle"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0001630",
+    "UBERON:0005090",
+    "UBERON:0002385",
+    "UBERON:0001015"
+   ],
+   "tests": "The hardest case. Exact returns only muscle organ and muscle structure, missing muscle tissue and musculature entirely. The 768-term stemmed set spans two senses and must be partitioned before any graph move. A good answer says which sense it chose and that the annotation is underspecified.",
+   "must_mention": [
+    "sense"
+   ],
+   "must_use": [
+    "stemmed"
+   ],
+   "answered_by_any_of": [
+    "stemmed",
+    "common-ancestors",
+    "alt-names"
+   ]
+  },
+  {
+   "id": "ehdaa2-outside-ubergraph",
+   "record": {
+    "raw_tissue": "liver",
+    "source_ontology": "ehdaa2"
+   },
+   "target": "ehdaa2",
+   "accepted": [
+    "EHDAA2:0000997"
+   ],
+   "tests": "Trivial lexically, but the ontology is not in Ubergraph. The report must say that graph moves were unavailable, and ideally that the term carries a stage link reachable only through neighbours.",
+   "must_mention": [
+    "Ubergraph"
+   ],
+   "must_use": [
+    "exact"
+   ],
+   "answered_by_any_of": [
+    "exact"
+   ],
+   "max_moves": 2
+  },
+  {
+   "id": "trivial-exact",
+   "record": {
+    "raw_tissue": "cornea"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0000964"
+   ],
+   "tests": "The cost control case. One exact probe and one term lookup. Any further move here is a failure of proportion, not of accuracy.",
+   "must_use": [
+    "exact"
+   ],
+   "answered_by_any_of": [
+    "exact"
+   ],
+   "max_moves": 1,
+   "must_not_use": [
+    "stemmed",
+    "alt-names",
+    "region",
+    "common-ancestors",
+    "relations"
+   ]
+  },
+  {
+   "id": "cortex-with-region",
+   "record": {
+    "tissue": "cortex",
+    "organ": "kidney"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0001225"
+   ],
+   "must_not_answer": [
+    "UBERON:0001851"
+   ],
+   "must_use": [
+    "exact"
+   ],
+   "answered_by_any_of": [
+    "exact",
+    "region"
+   ],
+   "must_mention": [
+    "kidney"
+   ],
+   "tests": "The generic-grouping trap. 'cortex' alone returns exactly one exact hit, UBERON:0001851, defined as 'Outermost layer of an organ' with organ part as its only parent -- so a count-based exit answers confidently and wrongly. The organ field composes into 'kidney cortex', an exact synonym of UBERON:0001225. Answering UBERON:0001851 is the failure this case exists to catch."
+  },
+  {
+   "id": "cortex-no-context",
+   "record": {
+    "tissue": "cortex"
+   },
+   "target": "uberon",
+   "accepted": [],
+   "expect_unresolved": true,
+   "must_not_answer": [
+    "UBERON:0001851"
+   ],
+   "tests": "The same trap with nothing to escape it. One exact hit, and it is a grouping class no record means. With no other field to say which cortex, the honest answer is that the record is ambiguous and the submitter should be asked -- not the single hit that happens to come back."
+  },
+  {
+   "id": "frontal-bone-narrow-only",
+   "record": {
+    "bone": "frontal",
+    "anatomical_site": "calvaria",
+    "organism": "Homo sapiens"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0000209"
+   ],
+   "must_not_answer": [
+    "UBERON:0000210",
+    "UBERON:0004865",
+    "UBERON:0004866"
+   ],
+   "must_use": [
+    "exact"
+   ],
+   "must_mention": [
+    "narrow"
+   ],
+   "tests": "Every hit arrives on narrow_synonym only: tetrapod frontal bone, tetrapod parietal bone, and two actinopterygian terms. Two things to get right. The channel says the ontology has no term at the grain asked for, only a broader grouping. And the result contains the wrong bone and the wrong taxon, so a report that does not reject parietal and the fish terms has not read the hits. Reading the field key is what makes 'frontal' a bone rather than the frontal cortex."
+  },
+  {
+   "id": "one-annotation-short-path",
+   "record": {
+    "study_level": "dorsal root ganglion"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0000044"
+   ],
+   "must_use": [
+    "exact"
+   ],
+   "answered_by_any_of": [
+    "exact"
+   ],
+   "max_moves": 1,
+   "must_not_use": [
+    "stemmed",
+    "alt-names",
+    "region",
+    "common-ancestors",
+    "relations"
+   ],
+   "tests": "The proportion case for the short path. The record is one field, the field is the exact label of UBERON:0000044, and nothing else in the record discriminates. One probe settles it. Observed before the rule existed: three lexical probes and two term calls, none of which changed the answer. Getting the term right while spending five calls is a failure of this case."
+  },
+  {
+   "id": "short-path-must-not-fire-on-an-ambiguous-string",
+   "record": {
+    "tissue": "cortex"
+   },
+   "target": "uberon",
+   "accepted": [],
+   "expect_unresolved": true,
+   "must_not_answer": [
+    "UBERON:0001851"
+   ],
+   "tests": "The short path's guard rail. This record is one-annotation and `cortex` returns exactly one exact hit matched on the label, so conditions 1-3 all hold. Condition 4 must stop it, and the reason is the string rather than the term: `cortex` is a short common ambiguous word, flagged in Prepare before any query ran, and the record gives nothing to say which cortex is meant. Answering UBERON:0001851 is the failure; so is reaching it by a grouping-class argument, which needs a parent the probe never returned.",
+   "must_mention": [
+    "ambiguous"
+   ]
+  },
+  {
+   "id": "short-path-must-not-fire-when-context-discriminates",
+   "record": {
+    "region": "apex",
+    "publication_id": "bayraktar_2024_heart"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0002098"
+   ],
+   "must_use": [
+    "exact"
+   ],
+   "tests": "Not one-annotation: the organ comes from the publication rather than from any tissue field, and it is doing the work -- 'apex' alone is heart, lung or tongue. A bare probe on 'apex' returns no exact hit at all, so the short path cannot fire, but the record must still be recognised as carrying a second annotation rather than as a one-field record that failed."
+  },
+  {
+   "id": "grain-prefer-the-sexed-term-when-subsumed",
+   "record": {
+    "location": "uterus | cervix | vagina",
+    "Characteristics[organism part]": "full reproductive tract"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0003975"
+   ],
+   "must_not_answer": [
+    "UBERON:0004175"
+   ],
+   "must_use": [
+    "exact"
+   ],
+   "must_mention": [
+    "specific"
+   ],
+   "tests": "A grain choice the specificity score settles. internal female genitalia (IC 53.1) is subsumed by internal genitalia (45.8), so they lie on one path and the more specific term wins -- the record names three female organs, so dropping sex discards what it says. Across four batch sizes this record split between the two terms, which is what the rule exists to stop."
+  },
+  {
+   "id": "grain-score-must-not-decide-across-branches",
+   "record": {
+    "Anatomical segment(s) (see diagram in link)": "12 (3rd to 6th rib, right)",
+    "Characteristics[organism part]": "rib"
+   },
+   "target": "uberon",
+   "accepted": [
+    "UBERON:0002228",
+    "UBERON:0016403"
+   ],
+   "tests": "Both terms are defensible and the case is about the reasoning, not the term. 'rib' reads the value as the bone; 'thoracic wall' reads it as the dissected block spanning ribs 3-6, which would include skin, muscle and fascia. A run must name whichever it did not take and say which reading it chose. What it may not do is prefer thoracic wall on its specificity score: that score is 92.8 against rib's 55.5 only because Uberon defines two thoracic walls and seventy-two ribs, neither subsumes the other, and `term` warns as much. An earlier version of this case asserted rib outright, which was written from the score rather than from what the record denotes.",
+   "must_name_rival_from": [
+    "UBERON:0002228",
+    "UBERON:0016403"
+   ],
+   "must_use": [
+    "exact"
+   ]
+  }
+ ]
+}
