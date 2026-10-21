@@ -23,8 +23,8 @@ dependencies = []
 test = ["pytest>=8"]
 
 [project.urls]
-Homepage = "https://github.com/Cellular-Semantics/atlas-skills"
-Repository = "https://github.com/Cellular-Semantics/atlas-skills"
+Homepage = "https://github.com/ubyndr/atlas-skills-release-test"
+Repository = "https://github.com/ubyndr/atlas-skills-release-test"
 
 [project.scripts]
 obs-column-eval = "obs_column_eval.cli:main"

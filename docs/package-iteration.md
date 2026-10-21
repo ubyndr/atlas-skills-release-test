@@ -41,7 +41,7 @@ release.
 A pin must resolve for someone with a cold cache. Check it the way CI does:
 
 ```
-uvx --from "git+https://github.com/Cellular-Semantics/atlas-skills@<tag>#subdirectory=packages/<dir>" <dir> --version
+uvx --from "git+https://github.com/ubyndr/atlas-skills-release-test@<tag>#subdirectory=packages/<dir>" <dir> --version
 ```
 
 Note the CLI name must match the package directory — that is what the check

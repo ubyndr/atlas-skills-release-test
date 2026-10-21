@@ -112,8 +112,8 @@ REQUIRED_PLUGIN = "author-annotation-columns"
 EXPECTED_PLUGIN_VERSION = "0.4.0"
 
 INSTALL_HINT = (
-    "  claude plugin marketplace add Cellular-Semantics/atlas-skills --scope user\n"
-    f"  claude plugin install {REQUIRED_PLUGIN}@atlas-skills --scope user")
+    "  claude plugin marketplace add ubyndr/atlas-skills-release-test --scope user\n"
+    f"  claude plugin install {REQUIRED_PLUGIN}@atlas-skills-release-test --scope user")
 
 
 def installed_plugins() -> list[dict]:
@@ -157,7 +157,7 @@ def check_plugin_installed() -> None:
                  f"cases expect {EXPECTED_PLUGIN_VERSION}. A pushed tag plus a "
                  "marketplace update is needed before an edit shows up here:\n"
                  "  claude plugin marketplace update atlas-skills\n"
-                 f"  claude plugin install {REQUIRED_PLUGIN}@atlas-skills --scope user")
+                 f"  claude plugin install {REQUIRED_PLUGIN}@atlas-skills-release-test --scope user")
 
 
 def main() -> int:

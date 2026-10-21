@@ -26,8 +26,8 @@ Needs the plugin installed **at user scope** — these cases test the
 `claude plugin marketplace update atlas-skills` before it shows up here.
 
 ```sh
-claude plugin marketplace add Cellular-Semantics/atlas-skills --scope user
-claude plugin install author-annotation-columns@atlas-skills --scope user
+claude plugin marketplace add ubyndr/atlas-skills-release-test --scope user
+claude plugin install author-annotation-columns@atlas-skills-release-test --scope user
 ```
 
 Each case runs in a fresh temporary directory, so nothing but the user-scope
@@ -98,7 +98,7 @@ CLIs. And it inherits the cwd rather than isolating to a temp directory, so a
 
 ```sh
 claude plugin marketplace add "$PWD" --scope local
-claude plugin install author-annotation-columns@atlas-skills --scope local
+claude plugin install author-annotation-columns@atlas-skills-release-test --scope local
 
 H5AD_OBS_CMD="packages/h5ad-obs/.venv/bin/h5ad-obs" \
 OBS_COLUMN_EVAL_CMD="packages/obs-column-eval/.venv/bin/obs-column-eval" \
@@ -107,7 +107,7 @@ OBS_COLUMN_EVAL_CMD="packages/obs-column-eval/.venv/bin/obs-column-eval" \
 
 Local scope writes to `.claude/settings.local.json`, which is gitignored, and
 does not disturb whatever is installed at user scope. Remove it afterwards with
-`claude plugin uninstall author-annotation-columns@atlas-skills --scope local`.
+`claude plugin uninstall author-annotation-columns@atlas-skills-release-test --scope local`.
 
 So the accuracy number can be measured, reviewed and landed *before* a release
 is tagged; only the behaviour cases have to wait for one.

@@ -31,8 +31,8 @@ parquet = ["pyarrow"]
 test = ["pytest>=8", "pyarrow"]
 
 [project.urls]
-Homepage = "https://github.com/Cellular-Semantics/atlas-skills"
-Repository = "https://github.com/Cellular-Semantics/atlas-skills"
+Homepage = "https://github.com/ubyndr/atlas-skills-release-test"
+Repository = "https://github.com/ubyndr/atlas-skills-release-test"
 
 [project.scripts]
 h5ad-obs = "h5ad_obs.cli:main"

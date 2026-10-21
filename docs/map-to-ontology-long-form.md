@@ -42,7 +42,7 @@ Every invocation looks like this. Keep the quotes — an unquoted command in a
 variable does not word-split under zsh, which is the default shell on macOS:
 
 ```
-uvx --from "${OQ_FROM:-git+https://github.com/Cellular-Semantics/atlas-skills@pkg-onto-query--v0.3.0#subdirectory=packages/onto-query}" oq <command>
+uvx --from "${OQ_FROM:-git+https://github.com/ubyndr/atlas-skills-release-test@pkg-onto-query--v0.3.0#subdirectory=packages/onto-query}" oq <command>
 ```
 
 That default is the pinned release and is what you should normally run. If

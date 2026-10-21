@@ -6,8 +6,8 @@
     "name": "Cellular Semantics",
     "url": "https://github.com/Cellular-Semantics"
   },
-  "homepage": "https://github.com/Cellular-Semantics/atlas-skills",
-  "repository": "https://github.com/Cellular-Semantics/atlas-skills",
+  "homepage": "https://github.com/ubyndr/atlas-skills-release-test",
+  "repository": "https://github.com/ubyndr/atlas-skills-release-test",
   "license": "MIT",
   "keywords": [
     "single-cell",
@@ -16,7 +16,7 @@
     "h5ad"
   ],
   "dependencies": [
-    "remote-h5ad-obs@atlas-skills",
-    "author-annotation-columns@atlas-skills"
+    "remote-h5ad-obs@atlas-skills-release-test",
+    "author-annotation-columns@atlas-skills-release-test"
   ]
 }

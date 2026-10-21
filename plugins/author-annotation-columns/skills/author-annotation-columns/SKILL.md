@@ -52,7 +52,7 @@ This is the whole shape of the skill, and the ordering matters.
 
 ```sh
 # 1. one remote read -- this is the expensive step, so do it once
-uvx --from "git+https://github.com/Cellular-Semantics/atlas-skills@pkg-h5ad-obs--v0.3.0#subdirectory=packages/h5ad-obs" \
+uvx --from "git+https://github.com/ubyndr/atlas-skills-release-test@pkg-h5ad-obs--v0.3.0#subdirectory=packages/h5ad-obs" \
     h5ad-obs <url> --out obs.parquet --block-size 0.25
 
 # 2. profile the file you just pulled -- free, no network
@@ -214,8 +214,8 @@ binning before HsapDv, `Tanner Stage` needs a lookup table, and
 ## See also
 
 - `remote-h5ad-obs` — the same reader, for when you just want obs.
-- [`packages/obs-column-eval`](https://github.com/Cellular-Semantics/atlas-skills/tree/main/packages/obs-column-eval)
+- [`packages/obs-column-eval`](https://github.com/ubyndr/atlas-skills-release-test/tree/main/packages/obs-column-eval)
   — the gold sets and metrics behind the numbers above, for all five field
   types. `obs-column-eval notes` prints the reasoning behind the awkward calls.
-- [`docs/benchmark.md`](https://github.com/Cellular-Semantics/atlas-skills/blob/main/docs/benchmark.md)
+- [`docs/benchmark.md`](https://github.com/ubyndr/atlas-skills-release-test/blob/main/docs/benchmark.md)
   — what the benchmark measured, and what changed since.

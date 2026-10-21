@@ -37,8 +37,8 @@ that has only ever seen the plugin directory.
 Install into the project you are working in, rather than globally:
 
 ```sh
-claude plugin marketplace add Cellular-Semantics/atlas-skills --scope local
-claude plugin install remote-h5ad-obs@atlas-skills --scope local
+claude plugin marketplace add ubyndr/atlas-skills-release-test --scope local
+claude plugin install remote-h5ad-obs@atlas-skills-release-test --scope local
 ```
 
 Install whichever plugins you want; they are independent. `atlas-tools` is a
@@ -49,7 +49,7 @@ the same result.
 `--scope local` writes `.claude/settings.local.json`, which is gitignored by
 convention: the plugin is available in this checkout, for you, and nowhere else.
 Nothing leaks into your other projects and nothing is committed. Remove it with
-`claude plugin uninstall remote-h5ad-obs@atlas-skills --scope local`.
+`claude plugin uninstall remote-h5ad-obs@atlas-skills-release-test --scope local`.
 
 The three scopes, and when each is right:
 
@@ -74,8 +74,8 @@ them without being told to install anything — install at **project** scope fro
 inside that repo:
 
 ```sh
-claude plugin marketplace add Cellular-Semantics/atlas-skills --scope project
-claude plugin install remote-h5ad-obs@atlas-skills --scope project
+claude plugin marketplace add ubyndr/atlas-skills-release-test --scope project
+claude plugin install remote-h5ad-obs@atlas-skills-release-test --scope project
 ```
 
 That writes `.claude/settings.json`. **Commit it.**
@@ -84,11 +84,11 @@ That writes `.claude/settings.json`. **Commit it.**
 {
   "extraKnownMarketplaces": {
     "atlas-skills": {
-      "source": { "source": "github", "repo": "Cellular-Semantics/atlas-skills" }
+      "source": { "source": "github", "repo": "ubyndr/atlas-skills-release-test" }
     }
   },
   "enabledPlugins": {
-    "remote-h5ad-obs@atlas-skills": true
+    "remote-h5ad-obs@atlas-skills-release-test": true
   }
 }
 ```
@@ -112,7 +112,7 @@ the two keys into it rather than overwriting.
 ## Use the CLI directly
 
 ```sh
-uvx --from "git+https://github.com/Cellular-Semantics/atlas-skills@pkg-h5ad-obs--v0.3.0#subdirectory=packages/h5ad-obs" \
+uvx --from "git+https://github.com/ubyndr/atlas-skills-release-test@pkg-h5ad-obs--v0.3.0#subdirectory=packages/h5ad-obs" \
     h5ad-obs https://datasets.cellxgene.cziscience.com/<id>.h5ad --list-columns
 ```
 

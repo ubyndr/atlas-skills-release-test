@@ -57,7 +57,7 @@ PROVENANCE = PROFILES / "PROVENANCE.json"
 PICKS_CACHE = HERE / ".cache" / "picks"
 
 TAG = "v0.3.0"
-GIT = "git+https://github.com/Cellular-Semantics/atlas-skills"
+GIT = "git+https://github.com/ubyndr/atlas-skills-release-test"
 
 
 def _cli(env_var: str, package: str, entrypoint: str) -> list[str]:
